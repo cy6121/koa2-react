@@ -7,6 +7,7 @@ const webpackConfig = require('../../config/webpack.dev.config');
 
 const clientCompiler = webpack(webpackConfig);
 
+
 clientCompiler.plugin('compile', () => {
   console.log(chalk.yellow('client compiling....  '));
 });
@@ -16,13 +17,13 @@ clientCompiler.plugin('done', () => {
 });
 
 module.exports = {
-  devMiddleware: c2k(devMiddleware(clientCompiler, {
+  devMiddleware: c2k(devMiddleware(clientCompiler, { // https://github.com/webpack/webpack-dev-middleware
     noInfo: true,
     stats: 'minimal',
     publicPath: webpackConfig.output.publicPath,
-    // serverSideRender: true,
+    serverSideRender: true,
     watchOptions: {
-      aggregateTimeout: 400, // client 重新编译要晚于server，这个数值要略大点
+      aggregateTimeout: 400,
       poll: 1000,
       ignored: /node_modules/,
     },

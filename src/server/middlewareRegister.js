@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import views from 'koa-views';
 import koaStatic from 'koa-static';
 import path from 'path';
@@ -18,7 +17,7 @@ module.exports = async function middlewareRegister(app) {
       ctx.body = '亲，>.<服务器出错啦~';
     }
   });
-  app.use(koaStatic(path.join(__dirname, '../dist/assets')));
+  app.use(koaStatic('dist/assets'));
   app.use(router);
   app.use(async (ctx) => {
     ctx.status = 404;

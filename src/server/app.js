@@ -1,24 +1,17 @@
 /* eslint-disable no-undef */
 import Koa from 'koa';
 import http from 'http';
-import middlewareRegitster from './middlewareRegitster';
+import config from '../../config/base.config';
+import middlewareRegister from './middlewareRegister';
 
 
-// export default function serverEntry(devMiddleware, hotMiddleware) {
 const app = new Koa();
 if (__DEV__) {
   const { devMiddleware, hotMiddleware } = require('./hmr');
   app.use(devMiddleware);
   app.use(hotMiddleware);
 }
-middlewareRegitster(app);
-http.createServer(app.callback()).listen(9092, () => {
-  console.log('listen to 9092...');
+middlewareRegister(app);
+http.createServer(app.callback()).listen(config.port, () => {
+  console.log(`listen to ${config.port}...`);
 });
-// }
-//
-// if (!__DEV__) {
-//   http.createServer(serverEntry()).listen(9092, () => {
-//     console.log('listen to 9092...');
-//   });
-// }

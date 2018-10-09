@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const AssetsPlugin = require('assets-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const babelConfig = require('../config/babel');
+const babelConfig = require('../config/babel').devClient;
 
 const client = {
   entry: {
@@ -15,7 +15,7 @@ const client = {
   mode: 'development',
   devtool: 'cheap-module-eval-source-map',
   output: {
-    path: path.join(__dirname, '../dist/assets'),
+    path: path.resolve(__dirname, '../dist/assets'),
     publicPath: '/',
     filename: 'js/[name].[hash:8].js',
   },
@@ -29,7 +29,7 @@ const client = {
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,
       loader: 'babel-loader',
-      options: babelConfig.devClient,
+      options: babelConfig,
     }, {
       test: /\.(css|pcss)$/,
       exclude: /node_modules/,
@@ -47,14 +47,10 @@ const client = {
       filename: 'css/[name].css',
       chunkFilename: 'css/[id].css',
     }),
-    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HashedModuleIdsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new AssetsPlugin({ filename: 'assets.json', path: path.join(__dirname, '../'), prettyPrint: true }),
-    // new webpack.DefinePlugin({
-    //   __SERVER__: 0,
-    //   __DEV__: 1,
-    // }),
   ],
   optimization: {
     runtimeChunk: {

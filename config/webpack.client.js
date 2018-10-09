@@ -3,9 +3,7 @@ const webpack = require('webpack');
 const AssetsPlugin = require('assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const babelConfig = require('../config/babel').proServer;
-
-// const ROOT_PATH = process.cwd();
+const babelConfig = require('../config/babel').proClient;
 
 module.exports = {
   mode: 'production',
@@ -17,7 +15,7 @@ module.exports = {
     index: './src/client/index.js',
   },
   output: {
-    path: path.join(__dirname, '../dist/assets'),
+    path: path.resolve(__dirname, '../dist/assets'),
     publicPath: '/',
     filename: 'js/[name].[hash:8].js',
   },
@@ -49,9 +47,7 @@ module.exports = {
       filename: 'css/[name].[hash].css',
       chunkFilename: 'css/[id].[hash].css',
     }),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.HashedModuleIdsPlugin(),
     new AssetsPlugin({ filename: 'assets.json', path: path.join(__dirname, '../'), prettyPrint: true }),
     new webpack.DefinePlugin({
       __CLIENT__: true,
@@ -81,5 +77,29 @@ module.exports = {
         },
       }),
     ],
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        commons: {
+          chunks: 'initial',
+          name: 'commons',
+          minChunks: 2,
+          minSize: 0, // This is example is too small to create commons chunks
+        },
+        styles: { // 抽取公共样式
+          test: /\.(pcss|css)$/,
+          chunks: 'all',
+          name: 'styles',
+          minChunks: 2,
+          enforce: true,
+        },
+        vendor: {
+          test: /node_modules/,
+          chunks: 'initial',
+          name: 'vendor',
+          priority: 10,
+        },
+      },
+    },
   },
 };

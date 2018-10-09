@@ -5,9 +5,9 @@ import { StaticRouter, Route, matchPath } from 'react-router-dom';
 import { routes } from '../../client/router/index';
 
 const router = new Router();
-const assets = require('../../../assets');
 
 async function index(ctx) {
+  const assets = require('../../../assets.json');
   const { url } = ctx.request;
   const data = {
     script: `<script src="${assets.index.js}"></script><script src="${assets.vendor.js}"></script><script src="${assets.manifest.js}"></script>`,

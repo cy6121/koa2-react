@@ -23,7 +23,6 @@ module.exports = {
     presets: ['es2015', 'stage-0', 'react'],
     plugins: [
       ['transform-runtime'],
-      // ['dynamic-import-node'],
       ['inline-replace-variables', {
         __CLIENT__: true,
         __DEV__: true,

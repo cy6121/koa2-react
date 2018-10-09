@@ -8,7 +8,7 @@ module.exports = {
   entry: './src/server/app.js',
   mode: 'production',
   output: {
-    path: path.join(__dirname, '../dist'),
+    path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
     filename: 'server.js',
     libraryTarget: 'commonjs2',
