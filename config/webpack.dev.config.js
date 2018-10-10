@@ -9,6 +9,7 @@ const client = {
     vendor: [
       'react',
       'react-dom',
+      'react-router-dom',
     ],
     index: ['webpack-hot-middleware/client?timeout=10000&reload=true', './src/client/index.js'],
   },
@@ -39,6 +40,14 @@ const client = {
         loader: 'css-loader',
       }, {
         loader: 'postcss-loader',
+      }],
+    }, {
+      test: /\.(svg|jpe?g|png|gif|ico)$/,
+      use: [{
+        loader: 'file-loader',
+        options: {
+          name: 'images/[name].[hash:8].[ext]',
+        },
       }],
     }],
   },

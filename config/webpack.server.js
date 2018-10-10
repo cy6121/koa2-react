@@ -34,7 +34,7 @@ module.exports = {
     new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
     new webpack.DefinePlugin({
       __CLIENT__: false,
-      __DEV__: true,
+      __DEV__: false,
     }),
   ],
   externals: [nodeExternals()], // 防止node_modules目录下的第三方模块被打包进去

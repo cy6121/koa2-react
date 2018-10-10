@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const AssetsPlugin = require('assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer'); // 打包分析
 const babelConfig = require('../config/babel').proClient;
 
 module.exports = {
@@ -11,6 +12,7 @@ module.exports = {
     vendor: [
       'react',
       'react-dom',
+      'react-router-dom',
     ],
     index: './src/client/index.js',
   },
@@ -51,8 +53,10 @@ module.exports = {
     new AssetsPlugin({ filename: 'assets.json', path: path.join(__dirname, '../'), prettyPrint: true }),
     new webpack.DefinePlugin({
       __CLIENT__: true,
-      __DEV__: true,
+      __DEV__: false,
     }),
+
+    // new BundleAnalyzerPlugin(),
   ],
   optimization: {
     runtimeChunk: {

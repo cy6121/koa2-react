@@ -27,6 +27,11 @@ module.exports = {
         __CLIENT__: true,
         __DEV__: true,
       }],
+      ['import', { // https://github.com/ant-design/babel-plugin-import
+        libraryName: '@material-ui/core',
+        libraryDirectory: 'es',
+        camel2DashComponentName: false, // 开启驼峰标识, with-styles => withStyles
+      }],
     ],
     babelrc: false,
   },
@@ -58,6 +63,11 @@ module.exports = {
     presets: ['es2015', 'stage-0', 'react'],
     plugins: [
       ['transform-runtime'],
+      ['import', {
+        libraryName: '@material-ui/core',
+        libraryDirectory: 'es',
+        camel2DashComponentName: false,
+      }],
     ],
     babelrc: false,
   },
