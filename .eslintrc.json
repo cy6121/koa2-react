@@ -39,7 +39,8 @@
     "no-console": "off",
     "global-require": "off",
     "globals": { // 不允许重写
-      "__SERVER__": true
+      "__DEV__": true,
+      "__CLIENT": true
     }
   }
 }

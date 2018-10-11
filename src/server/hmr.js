@@ -7,7 +7,6 @@ const webpackConfig = require('../../config/webpack.dev.config');
 
 const clientCompiler = webpack(webpackConfig);
 
-
 clientCompiler.plugin('compile', () => {
   console.log(chalk.yellow('client compiling....  '));
 });

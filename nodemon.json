@@ -1,4 +1,4 @@
 {
-  "watch": ["src", "config", "bin"],
+  "watch": ["src/server", "config"],
   "exec": "node"
 }
