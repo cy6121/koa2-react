@@ -41,5 +41,5 @@ app.use(KoaStatic('dist/static'));
 app.use(router.routes());
 // 配置静态资源
 app.listen(3000, () => {
-  console.log('app start')
+  console.log('app start');
 });

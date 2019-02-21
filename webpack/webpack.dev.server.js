@@ -8,21 +8,26 @@ module.exports = {
   mode: 'development',
   target: 'node',
   entry: {
-    server: './src/server/controller.js'
+    server: './src/server/controller.js',
   },
   output: {
     path: path.join(__dirname, '../dist'),
     filename: 'server.js',
     libraryTarget: 'commonjs2',
-    publicPath: '/'
+    publicPath: '/',
   },
   module: {
     rules: [
       {
+        enforce: 'pre',
+        test: /\.(js|jsx)$/,
+        loader: 'eslint-loader',
+        exclude: /node_modules/,
+      }, {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
-      }
-    ]
+      },
+    ],
   },
 };

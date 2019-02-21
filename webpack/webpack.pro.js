@@ -12,22 +12,27 @@ module.exports = [
     mode: 'production',
     entry: {
       vendor: ['react', 'react-dom'],
-      index: './src/client/index.js'
+      index: './src/client/index.js',
     },
     output: {
       path: path.join(__dirname, '../dist/static'),
       filename: '[name].[hash:8].js',
       chunkFilename: '[name].[chunkhash:8].js',
-      publicPath: '/'
+      publicPath: '/',
     },
     module: {
       rules: [
         {
+          enforce: 'pre',
+          test: /\.(js|jsx)$/,
+          loader: 'eslint-loader',
+          exclude: /node_modules/,
+        }, {
           test: /\.(js|jsx)$/,
           loader: 'babel-loader',
           exclude: /node_modules/,
-        }
-      ]
+        },
+      ],
     },
     plugins: [
       new AssetPlugin({ filename: 'assets.json', path: path.join(__dirname, '..'), prettyPrint: false }),
@@ -35,28 +40,33 @@ module.exports = [
     ],
     optimization: {
       runtimeChunk: {
-        name: 'manifest'
+        name: 'manifest',
       },
-    }
+    },
   }, {
     mode: 'production',
     target: 'node',
     entry: {
-      server: './src/server/server.pro.js'
+      server: './src/server/server.pro.js',
     },
     output: {
       path: path.join(__dirname, '../dist'),
       filename: 'server.js',
       libraryTarget: 'commonjs2',
-      publicPath: '/'
+      publicPath: '/',
     },
     module: {
       rules: [
         {
+          enforce: 'pre',
+          test: /\.(js|jsx)$/,
+          loader: 'eslint-loader',
+          exclude: /node_modules/,
+        }, {
           test: /\.(js|jsx)$/,
           loader: 'babel-loader',
           exclude: /node_modules/,
-        }
+        },
       ],
       noParse: /\.min\.js/,
     },
@@ -67,5 +77,5 @@ module.exports = [
       net: 'empty',
       tls: 'empty',
     },
-  }
+  },
 ];

@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 export default class Home extends Component {
   state = {
-    count: 1
+    count: 1,
   };
   handleCount = () => {
     this.setState({ count: this.state.count + 1 });
@@ -18,10 +18,10 @@ export default class Home extends Component {
         Hello React!
         <div>
           count: {this.state.count}
-          <button onClick={this.handleCount}>增加</button>
+          <button type="button" onClick={this.handleCount}>增加</button>
         </div>
         <Link to="/notFound">notFound</Link>
       </div>
-    )
+    );
   }
 }

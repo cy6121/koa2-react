@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /**
  * Created by Raion on 2019/2/19.
  */
@@ -18,8 +19,8 @@ async function indexController(ctx) {
   return ctx.render('index', { content, scripts: [assets.vendor, assets.index, assets.manifest] });
 }
 
-function cleanCache (modulePath) {
-  var module = require.cache[modulePath];
+function cleanCache(modulePath) {
+  const module = require.cache[modulePath];
   // remove reference in module.parent
   if (module && module.parent) {
     module.parent.children.splice(module.parent.children.indexOf(module), 1);
@@ -31,23 +32,21 @@ const app = new Koa();
 const router = new Router();
 router.get('*', indexController);
 middlewareRegister(app).then(() => {
-
-
   app.use(views(path.resolve(__dirname, './views'), {
     extension: 'hbs',
     map: { hbs: 'handlebars' },
   }));
   app.use(KoaStatic(path.join('dist/static')));
   app.use(router.routes());
-// 配置静态资源
+  // 配置静态资源
   app.listen(3000, () => {
-    console.log('app start')
+    console.log('app start');
   });
-  fs.watch(require.resolve('../../dist/server.js'), function () {
+  fs.watch(require.resolve('../../dist/server.js'), () => {
     cleanCache(require.resolve('../../dist/server.js'));
   });
 
-  fs.watch(require.resolve('../../assets.json'), function () {
+  fs.watch(require.resolve('../../assets.json'), () => {
     cleanCache(require.resolve('../../assets.json'));
   });
 });
@@ -96,4 +95,3 @@ middlewareRegister(app).then(() => {
 //     cleanCache(require.resolve('../../assets.json'));
 //   });
 // });
-

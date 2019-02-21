@@ -11,7 +11,7 @@ import Routes from '../client/router/router';
 export default function render(url, data) {
   return renderToString(
     <StaticRouter context={{}} location={url}>
-      <Routes/>
-    </StaticRouter>
+      <Routes />
+    </StaticRouter>,
   );
 }

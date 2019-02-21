@@ -7,7 +7,7 @@ import React from 'react';
 export default function NotFound() {
   return (
     <p>
-      404, 页面没有发现.111
+      404, 页面没有发现
     </p>
-  )
+  );
 }
