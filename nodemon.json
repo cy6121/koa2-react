@@ -1,4 +1,7 @@
 {
-  "watch": ["src/server", "config"],
-  "exec": "node"
+  "verbose": false,
+  "watch": [
+    "src/server/server.dev.js",
+    "webpack"
+  ]
 }

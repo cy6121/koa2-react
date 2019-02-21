@@ -1,5 +1,10 @@
-.DS_Store
-.idea
+.idea/
+node_modules/
+*.map
 assets.json
+.DS_Store
 dist
-node_modules
+*.sh
+*.log
+.happypack
+yarn-error.log

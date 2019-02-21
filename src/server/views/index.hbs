@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>React SSR</title>
+</head>
+<body>
+  <div id="app">{{{content}}}</div>
+  {{# scripts}}
+  <script src="{{js}}"></script>
+  {{/scripts}}
+</body>
+</html>
