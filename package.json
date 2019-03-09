@@ -26,12 +26,15 @@
   },
   "homepage": "https://github.com/cy6121/koa2-react#readme",
   "dependencies": {
+    "@babel/polyfill": "^7.2.5",
     "koa": "^2.7.0",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
-    "react-router-dom": "^4.3.1"
+    "react-redux": "^6.0.1",
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.3.3",
@@ -62,6 +65,7 @@
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
     "postcss-preset-env": "^6.6.0",
+    "prop-types": "^15.7.2",
     "rimraf": "^2.6.3",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3",

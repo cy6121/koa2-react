@@ -8,14 +8,13 @@ import { Route, Switch } from 'react-router-dom';
 import Home from '../container/home/home';
 import NotFound from '../container/NotFound';
 
-// const routes = [
-//   { exact: true, key: 'app', path: '/', component: App },
-//   { exact: true, key: '404', path: '/404', component: NotFound },
-// ];
+export const routes = [
+  { exact: true, key: 'home', path: '/', component: Home },
+  { exact: true, key: '404', path: '/404', component: NotFound },
+];
 
 export default () => (
   <Switch>
-    <Route exact path="/" component={Home} />
-    <Route path="/notFound" component={NotFound} />
+    {routes.map(route => (<Route {...route} />))}
   </Switch>
 );
