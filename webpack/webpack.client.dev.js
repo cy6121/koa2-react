@@ -4,6 +4,7 @@
 
 const path = require('path');
 const AssetPlugin = require('assets-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true&timeout=10000';
 
@@ -16,7 +17,7 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, '../dist/static'),
-    filename: '[name].[hash:8].js',
+    filename: 'js/[name].[hash:8].js',
     publicPath: '/'
   },
   module: {
@@ -30,6 +31,17 @@ module.exports = {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
+      }, {
+        test: /\.(css|pcss)$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          }, {
+            loader: 'css-loader'
+          }, {
+            loader: 'postcss-loader',
+          }
+        ]
       }
     ]
   },
@@ -37,6 +49,12 @@ module.exports = {
     new AssetPlugin({ filename: 'assets.json', path: path.join(__dirname, '..'), prettyPrint: true }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: "css/[name].css",
+      chunkFilename: "css/[id].css"
+    }),
   ],
   optimization: {
     runtimeChunk: {

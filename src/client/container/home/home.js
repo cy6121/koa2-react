@@ -14,7 +14,7 @@ export default class Home extends Component {
   };
   render() {
     return (
-      <div>
+      <div className="flex">
         Hello React!
         <div>
           count: {this.state.count}

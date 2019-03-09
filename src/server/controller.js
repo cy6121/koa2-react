@@ -19,15 +19,15 @@ function serverRender(url) {
 export function renderHtml(ctx, data) {
   const assets = require('../../assets.json');
   const content = renderToString(serverRender(ctx.url));
-  ctx.body = `${Header}${content}${getFooter({ assets, ...data })}`;
+  ctx.body = `${Header(assets)}${content}${getFooter({ assets, ...data })}`;
 }
 
 export function renderStream(ctx, data) {
+  const assets = require('../../assets.json');
   ctx.respond = false; // 防止koa自动处理response
   ctx.status = 200; // koa未处理会报404
-  ctx.res.write(Header);
+  ctx.res.write(Header(assets));
   const stream = renderToNodeStream(serverRender(ctx.url));
-  const assets = require('../../assets.json');
   stream.pipe(ctx.res, { end: false });
   stream.on('end', () => {
     ctx.res.end(getFooter({ assets, ...data }));
