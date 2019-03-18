@@ -1,9 +1,10 @@
+/* eslint-disable import/prefer-default-export */
 /**
  * Created by Raion on 2019/2/19.
  */
 
 import React from 'react';
-import { renderToString, renderToNodeStream } from 'react-dom/server';
+import { renderToNodeStream } from 'react-dom/server';
 import { StaticRouter, matchPath } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import Routes, { routes } from '../client/router/router';
@@ -22,19 +23,15 @@ function serverRender(url, data) {
 }
 
 async function handlePreData(ctx) {
-  const lists = routes.filter(route => matchPath(ctx.path, route));
+  const lists = routes.filter(route => matchPath(ctx.url, route));
   if (lists.length) {
-    const data = await Promise.all(lists.map(route => route.component.fetchData()));
+    const fetchList = lists.filter(route => typeof route.component.fetchData === 'function');
+    const data = await Promise.all(fetchList.map(route => route.component.fetchData()));
     const result = {};
     data.forEach(item => Object.assign(result, item));
     return result;
   }
   return undefined;
-}
-
-export function renderHtml(ctx) {
-  const content = renderToString(serverRender(ctx.url));
-  ctx.body = `${Header}${content}${getFooter()}`;
 }
 
 export async function renderStream(ctx) {

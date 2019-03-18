@@ -6,6 +6,7 @@ const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const AssetPlugin = require('assets-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   mode: 'production',
@@ -41,6 +42,12 @@ module.exports = {
             loader: 'postcss-loader',
           }
         ]
+      }, {
+        test: /\.(jpeg|gif|png|jpg|svg)$/,
+        loader: 'file-loader',
+        options: {
+          name: 'image/[name].[hash:8].[ext]'
+        }
       }
     ],
   },
@@ -58,5 +65,16 @@ module.exports = {
     runtimeChunk: {
       name: 'manifest',
     },
+    minimizer: [
+      new TerserPlugin({
+        cache: false,
+        parallel: true,
+        terserOptions: {
+          output: {
+            comments: false,
+          },
+        },
+      }), // fix Cannot set property 'lastEffect' of null
+    ],
   },
 };

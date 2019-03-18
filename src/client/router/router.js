@@ -10,7 +10,7 @@ import NotFound from '../container/NotFound';
 
 export const routes = [
   { exact: true, key: 'home', path: '/', component: Home },
-  { exact: true, key: '404', path: '/404', component: NotFound },
+  { exact: true, key: '404', path: '*', component: NotFound },
 ];
 
 export default () => (

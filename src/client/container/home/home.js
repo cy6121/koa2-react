@@ -1,3 +1,4 @@
+/* eslint-disable react/self-closing-comp */
 /**
  * Created by Raion on 2019/2/20.
  */
@@ -17,13 +18,16 @@ class Home extends Component {
   }
   render() {
     return (
-      <div className="flex">
-        Hello React!
-        <div>
-          count: {this.props.count}
-          <button type="button" onClick={this.props.changeCount}>增加</button>
+      <div className="container">
+        <img style={{ width: 200, height: 360 }} src={require('../../assets/images/nznd.jpeg')} alt="" />
+        <div className="flex">
+          Hello React!
+          <div>
+            count: {this.props.count}
+            <button type="button" onClick={this.props.changeCount}>增加</button>
+          </div>
+          <Link to="/404">notFound</Link>
         </div>
-        <Link to="/404">notFound</Link>
       </div>
     );
   }

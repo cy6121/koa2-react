@@ -6,8 +6,9 @@ import React from 'react';
 
 export default function NotFound() {
   return (
-    <p>
-      404, 页面没有发现
-    </p>
+    <div style={{ marginTop: 200, textAlign: 'center' }}>
+      <img style={{ width: 360, height: 200 }} src={require('../assets/images/whws.jpeg')} alt="" />
+      <p>页面找不到哦～</p>
+    </div>
   );
 }
